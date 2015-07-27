@@ -1,0 +1,1065 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Android Explorer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="AzenHuang">
+    
+
+    
+    <meta name="description" content="Find something new , learn something more">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Android Explorer">
+<meta property="og:url" content="http://azenhuang.github.io/index.html">
+<meta property="og:site_name" content="Android Explorer">
+<meta property="og:description" content="Find something new , learn something more">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android Explorer">
+<meta name="twitter:description" content="Find something new , learn something more">
+<link rel="publisher" href="azenhuang">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Android Explorer" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/apple.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/apple.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Android Explorer" title="Android Explorer"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Android Explorer">Android Explorer</a></h1>
+				<h2 class="blog-motto">Find something new , learn something more</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="http://zhannei.baidu.com/cse/search" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value= 8538219875648667000 ><input type="text" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main">
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/07/27/详解Android开发中dp dip sp px dpi ppi 区别和转换/" title="详解Android开发中dp dip sp px dpi ppi 区别和转换" itemprop="url">详解Android开发中dp dip sp px dpi ppi 区别和转换</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/azenhuang?rel=author" title="AzenHuang" target="_blank" itemprop="author">AzenHuang</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-27T04:06:00.000Z" itemprop="datePublished"> 发表于 2015-07-27</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>实际开发中经常被这几个概念搞得晕头转向，虽然知道布局用dp，字体大小用sp，但确不知其所以然，今天特地整理了一下资料，分享出来。</p>
+<h2 id="概念解释">概念解释</h2><ol>
+<li>px : pixel ,一个像素点 ，如手机分辨率320*480表示宽有320像素，高有480像素。</li>
+<li>in :Inches ，英寸，屏幕物理尺寸大小， 1 英寸 = 2.54 厘米。屏幕大小是手机对角线的物理尺寸，以英寸（inch）为单位。比如某某手机为“5寸大屏手机”，就是指对角线的尺寸，5寸×2.54厘米/寸=12.7厘米。</li>
+<li><p>ppi :pixels per inch,图像分辨率 （在图像中，每英寸所包含的像素数目）。<br>dpi : dots per inch, 打印分辨率 （每英寸所能打印的点数，即打印精度），实际移动应用中，dpi和ppi一样的。所谓的屏幕密度指的就是这个。</p>
+<blockquote>
+<p>dpi = ppi = √（长度像素数² + 宽度像素数²） / 屏幕对角线英寸数 = 对角线像素数/屏幕对角线英寸数</p>
+</blockquote>
+<p>假如我们知道一部手机的分辨率是1080×1920，屏幕大小是5英寸，根据公式计算结果是440dpi。</p>
+</li>
+<li><p>dp=dip(Density-independent pixels),基于屏幕物理分辨率一个抽象的单位，用于说明与密度无关的尺寸和位置。</p>
+<blockquote>
+<p>px = dp*ppi/160<br>dp = px*160/ppi</p>
+</blockquote>
+<p>从公式可以看出，公式的由来是已160dpi的屏幕为基准，此时该屏幕1dp=1px。如果320dpi的屏幕上，公式推导可得1dp = 2px。<br>dp更类似一个物理尺寸，比如一张宽和高均为100dp的图片在320×480和480×800的手机上“看起来”一样大。而实际上，它们的像素值并不一样。dp正是这样一个尺寸，不管这个屏幕的密度是多少，屏幕上相同dp大小的元素看起来始终差不多大。</p>
+</li>
+<li>sp :Scale-independent Pixels - 和dp单位很像，不过sp可以通过用户设置的字体大小而缩放. 为了能够自适应屏幕密度和用户的设置，建议设置字体大小时候用sp.当安卓系统字号设为“普通”时，sp=dp.</li>
+</ol>
+<p><strong>由以上概念以及公式可知，求dp或sp的过程为，分辨率+屏幕对角线英寸→dpi/ppi→dp/sp</strong></p>
+<h2 id="Android系统定义的dpi">Android系统定义的dpi</h2><h3 id="实际dpi（公式计算出来的结果）和Android系统dpi">实际dpi（公式计算出来的结果）和Android系统dpi</h3><p>假如分辨率1080×1920，那么5英寸计算出来的是440，4.5英寸dpi是490。如此看来，屏幕密度将会出现很多数值，呈现严重的碎片化。而密度又是安卓屏幕将界面进行缩放显示的依据，那么安卓是如何适配这么多屏幕的呢？<br>其实，每部安卓手机屏幕都有一个初始的固定dpi值，这些数值是120、160、240、320、480，可以看作为“系统密度”。<strong>安卓对界面元素进行缩放的比例依据正是系统定义的dpi值，而不是实际计算出来的dpi。</strong></p>
+<h3 id="系统定义dpi图解">系统定义dpi图解</h3><table>
+<thead>
+<tr>
+<th>密度</th>
+<th>ldpi</th>
+<th>mdpi</th>
+<th>hdpi</th>
+<th>xhdpi</th>
+<th>xxhdpi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>代表分辨率</td>
+<td>240x320</td>
+<td>320x480</td>
+<td>480x800</td>
+<td>720x1280</td>
+<td>1080x1920</td>
+</tr>
+<tr>
+<td>密度值（dpi）</td>
+<td>120</td>
+<td>160</td>
+<td>240</td>
+<td>320</td>
+<td>480</td>
+</tr>
+<tr>
+<td>比例</td>
+<td>3</td>
+<td>4</td>
+<td>6</td>
+<td>8</td>
+<td>12</td>
+</tr>
+<tr>
+<td>mdpi基准比例</td>
+<td>0.75</td>
+<td>1</td>
+<td>1.5</td>
+<td>2</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Android系统dpi关系表格，以mdpi（160）为基准</strong></p>
+<h2 id="不同屏幕分辨率下的dp差异，布局文件配置">不同屏幕分辨率下的dp差异，布局文件配置</h2><p><img src="https://img.alicdn.com/imgextra/i3/353383760/TB2.DVweXXXXXX4XXXXXXXXXXXX_!!353383760.jpg_620x10000.jpg" alt="不同分辨率对应的dp"><br>如果想消除这些比例差异，可以通过添加布局文件来实现。一般情况下，布局文件放在layout文件夹中，如果要单独对360dp的屏幕进行调整，你可以单做做一个布局文件放在layout-w360dp中；不过，<strong>最好是默认针对360dp的屏幕布局（较为主流）</strong>，然后对320dp的屏幕单独布局，将布局文件放到layout-w320dp中；如果你想对某个特殊的分辨率进行调整，那么你可以将布局文件放在标有分辨率的文件夹中，如layout-854×480。<br>一般APP的适配主要以宽度为准，高度不作限制，如果超出本机设备屏幕高度则采用内容滚动（顶部的导航栏与底部的标签栏固定不变）。</p>
+<h2 id="图片建议提供一套drawable-xhdpi">图片建议提供一套drawable-xhdpi</h2><p>针对不同分辨率不同屏幕尺寸的手机，没必要为各个密度提供一套素材，这样可以减小apk大小。现在手机比较高的分辨率是1080×1920（xxhdpi），你可以选择这个尺寸作图，但是图片素材将会增大应用安装包的大小。并且尺寸越大的图片占用的内存也就越高。如果你不是设计ROM，而是做一款应用，建议在720×1280（xhdpi）的画布中作图。这个尺寸兼顾了美观性、经济性和计算的简单。美观性是指，以这个尺寸做出来的应用，在720×1280中显示完美，在1080×1920中看起来也比较清晰；经济性是指，这个分辨率下导出的图片尺寸适中，内存消耗不会过高，并且图片文件大小适中，安装包也不会过大；计算的简单，就是1dp=2px啊，多好计算啊！<br>如果应用在低端手机上运行较卡顿，可以根据需要提供部分mdpi的图片素材，因为xhdpi中的图片运行在mdpi的手机上会比较占内存。<br>以应用图标为例，xhdpi中的图标大小是96px，如果要单独给mdpi提供图标，那么这个图标大小是48px，放到drawable-mdpi的资源文件夹中。各个资源文件夹中的图片尺寸同样符合ldpi:mdpi:hdpi:xhdpi:xxhdpi=3:4:6:8:12的规律。如果你把一个高2px的分割线素材做成了9.png图片，你想让细线在不同密度中都是2px，而不被安卓根据密度进行缩放，怎么办？你可以把这个分割线素材放到drawable-nodpi中，这个资源文件夹中的图片，将按照实际像素大小进行显示，而不会被安卓根据密度进行缩放。即在mdpi中细线是2px（2dp），在xhdpi中细线是2px（1dp）。<br>如果你把一个高2px的分割线素材做成了9.png图片，你想让细线在不同密度中都是2px，而不被安卓根据密度进行缩放，怎么办？你可以把这个分割线素材放到drawable-nodpi中，这个资源文件夹中的图片，将按照实际像素大小进行显示，而不会被安卓根据密度进行缩放。即在mdpi中细线是2px（2dp），在xhdpi中细线是2px（1dp）。<br><img src="https://img.alicdn.com/imgextra/i3/353383760/TB2sfXyeXXXXXX6XXXXXXXXXXXX_!!353383760.jpg" alt="图片资源文件示例"></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Android基础知识/">Android基础知识</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Android/">Android</a><a href="/tags/屏幕适配/">屏幕适配</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/07/27/详解Android开发中dp dip sp px dpi ppi 区别和转换/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/07/27/详解Android开发中dp dip sp px dpi ppi 区别和转换/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/07/24/win7下安装hexo后找不到命令/" title="win7下安装hexo后找不到命令" itemprop="url">win7下安装hexo后找不到命令</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/azenhuang?rel=author" title="AzenHuang" target="_blank" itemprop="author">AzenHuang</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-24T09:43:12.000Z" itemprop="datePublished"> 发表于 2015-07-24</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>在win下安装完nodejs,版本号v0.12.7，用npm安装hexo，版本v0.12.7，出现<br><code>hexo: command not found</code><br>我猜应该是找不到路径，设置了环境变量，Path再新增C:\Users\xxxx\AppData\Roaming\npm,依旧找不到命令，无奈最后只能把 nodejs安装目录\node_global下node_modules ,hexo ,hexo.cmd拷到nodejs安装根目录下才能用。网上查资料发现nodejs在win7有些问题，不知道有更好的解决方案没有？</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/hexo/">hexo</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/07/24/win7下安装hexo后找不到命令/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/07/24/win7下安装hexo后找不到命令/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/06/27/hello-world/" title="Hello World" itemprop="url">Hello World</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/azenhuang?rel=author" title="AzenHuang" target="_blank" itemprop="author">AzenHuang</a>
+		
+  <p class="article-time">
+    <time datetime="2015-06-27T04:06:00.000Z" itemprop="datePublished"> 发表于 2015-06-27</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/06/27/hello-world/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/06/27/hello-world/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/11/20/how-to-use-jacman/" title="如何使用 Jacman 主题" itemprop="url">如何使用 Jacman 主题</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/azenhuang?rel=author" title="AzenHuang" target="_blank" itemprop="author">AzenHuang</a>
+		
+  <p class="article-time">
+    <time datetime="2014-11-20T01:58:17.000Z" itemprop="datePublished"> 发表于 2014-11-20</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="主题介绍">主题介绍</h2><p><a href="https://github.com/wuchong/jacman">Jacman</a> 是一款扁平化，有着响应式设计的 <a href="http://http://hexo.io/">Hexo</a> 主题。本站正式使用了 Jacman 主题。Jacman 基于 <a href="https://github.com/A-limon/pacman">Pacman</a> 主题修改而来，目前已有很多特性与原主题不同。你可以前往 <a href="http://wuchong.me">本站</a> 和 <a href="http://wuchong.me/jacman">Demo</a> 预览更多关于本主题的更多效果。如果你有任何问题或意见欢迎到 GitHub 发表 <a href="https://github.com/wuchong/jacman/issues">issue</a>。</p>
+<p>距离当初我把 Jacman 开源至今已有半年零一周了，在这半年里也一直保持着对 Jacman 的更新。看到很多人用这款主题，fork&amp;star 数也越来越好看，我也更有动力继续完善 Jacman。Jacman 自然还有很多改进空间，首先是文档问题，有许多人通过博客、微博、QQ 询问我有关主题的问题，我也意识到之前写的帮助手册可读性太差。正好趁着这次 Jacman 大更新，写篇更详尽、readable 的手册。</p>
+<h2 id="安装指南">安装指南</h2><h3 id="安装">安装</h3><p>在博客根目录下执行如下命令。<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>git clone <span class="symbol">https:</span>/<span class="regexp">/github.com/wuchong</span><span class="regexp">/jacman.git themes/jacman</span></span><br></pre></td></tr></table></figure></p>
+<p>Jacman 需要安装 Hexo 2.7 及以上版本，请先升级您的 Hexo 程序，再启用此主题。</p>
+<h3 id="启用">启用</h3><p>修改你的博客根目录下的<code>_config.yml</code>配置文件中的<code>theme</code>属性，将其设置为<code>jacman</code>。同时建议设置<code>stylus</code>属性中的<code>compress</code>值为true，会自动压缩 CSS 文件，hexo默认配置中不包含这一项，建议开启。如下。<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">theme:</span> jacman</span><br><span class="line"><span class="string">stylus:</span></span><br><span class="line"><span class="label">  compress:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="更新">更新</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> themes/jacman</span><br><span class="line">git pull origin master</span><br></pre></td></tr></table></figure>
+<p>请先备份您主题目录下的 <code>_config.yml</code> 文件后再升级。</p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2014/11/20/how-to-use-jacman/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Hexo/">Hexo</a><a href="/tags/Jacman/">Jacman</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2014/11/20/how-to-use-jacman/#comments" class="ds-thread-count comments-count-link" data-thread-key="2014/11/20/how-to-use-jacman/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand photo" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/11/18/gallery-post/" title="Gallery Post" itemprop="url">Gallery Post</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/azenhuang?rel=author" title="AzenHuang" target="_blank" itemprop="author">AzenHuang</a>
+		
+  <p class="article-time">
+    <time datetime="2014-11-18T07:45:20.000Z" itemprop="datePublished"> 发表于 2014-11-18</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>Nunc dignissim volutpat enim, non sollicitudin purus dignissim id. Nam sit amet urna eu velit lacinia eleifend. Proin auctor rhoncus ligula nec aliquet. Donec sodales molestie lacinia. Curabitur dictum faucibus urna at convallis. Aliquam in lectus at urna rutrum porta. In lacus arcu, molestie ut vestibulum ut, rhoncus sed eros. Sed et elit vitae risus pretium consectetur vel in mi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempus turpis quis lectus rhoncus adipiscing. Proin pulvinar placerat suscipit. Maecenas imperdiet, quam vitae varius auctor, enim mauris vulputate sapien, nec laoreet neque diam non quam.</p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2014/11/18/gallery-post/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Photo/">Photo</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/consectetur/">consectetur</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2014/11/18/gallery-post/#comments" class="ds-thread-count comments-count-link" data-thread-key="2014/11/18/gallery-post/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/12/26/images/" title="Images" itemprop="url">Images</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/azenhuang?rel=author" title="AzenHuang" target="_blank" itemprop="author">AzenHuang</a>
+		
+  <p class="article-time">
+    <time datetime="2013-12-26T14:46:49.000Z" itemprop="datePublished"> 发表于 2013-12-26</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>This is a image test post.</p>
+<p><img src="/images/wallpaper-2572384.jpg" alt=""></p>
+<p><img src="/images/wallpaper-2311325.jpg" alt="Caption"></p>
+<p><img src="/images/wallpaper-878514.jpg" alt=""></p>
+<p><img src="http://placehold.it/350x150.jpg" alt="Small Picture"></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2013/12/26/images/#comments" class="ds-thread-count comments-count-link" data-thread-key="2013/12/26/images/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/12/25/no-title/" title="" itemprop="url"></a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/azenhuang?rel=author" title="AzenHuang" target="_blank" itemprop="author">AzenHuang</a>
+		
+  <p class="article-time">
+    <time datetime="2013-12-25T14:57:49.000Z" itemprop="datePublished"> 发表于 2013-12-25</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>This post doesn’t have a title. Make sure it’s accessible.</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2013/12/25/no-title/#comments" class="ds-thread-count comments-count-link" data-thread-key="2013/12/25/no-title/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/12/25/excerpts/" title="Excerpts" itemprop="url">Excerpts</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/azenhuang?rel=author" title="AzenHuang" target="_blank" itemprop="author">AzenHuang</a>
+		
+  <p class="article-time">
+    <time datetime="2013-12-24T16:23:23.000Z" itemprop="datePublished"> 发表于 2013-12-25</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>The following contents should be invisible in home/archive page.</p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2013/12/25/excerpts/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2013/12/25/excerpts/#comments" class="ds-thread-count comments-count-link" data-thread-key="2013/12/25/excerpts/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/12/25/videos/" title="Videos" itemprop="url">Videos</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/azenhuang?rel=author" title="AzenHuang" target="_blank" itemprop="author">AzenHuang</a>
+		
+  <p class="article-time">
+    <time datetime="2013-12-24T16:19:15.000Z" itemprop="datePublished"> 发表于 2013-12-25</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>This is a video test post.</p>
+<p><strong>Youtube</strong></p>
+<div class="video-container"><iframe src="//www.youtube.com/embed/TIbZDRXM-Tg" frameborder="0" allowfullscreen></iframe></div>
+<p><strong>Vimeo</strong></p>
+<div class="video-container"><iframe src="//player.vimeo.com/video/82090131" frameborder="0" allowfullscreen></iframe></div>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2013/12/25/videos/#comments" class="ds-thread-count comments-count-link" data-thread-key="2013/12/25/videos/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/12/25/tag-plugins/" title="Tag Plugins" itemprop="url">Tag Plugins</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/azenhuang?rel=author" title="AzenHuang" target="_blank" itemprop="author">AzenHuang</a>
+		
+  <p class="article-time">
+    <time datetime="2013-12-24T16:14:39.000Z" itemprop="datePublished"> 发表于 2013-12-25</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>This post is used for testing tag plugins. See <a href="http://zespia.tw/hexo/docs/tag-plugins.html" target="_blank" rel="external">docs</a> for more info.</p>
+<h2 id="Block_Quote">Block Quote</h2><h3 id="Normal_blockquote">Normal blockquote</h3><blockquote>
+<p>Praesent diam elit, interdum ut pulvinar placerat, imperdiet at magna.</p>
+</blockquote>
+<h3 id="Quote_from_a_book">Quote from a book</h3><blockquote><p>Do not just seek happiness for yourself. Seek happiness for all. Through kindness. Through mercy.</p>
+<footer><strong>David Levithan</strong><cite>Wide Awake</cite></footer></blockquote>
+<h3 id="Quote_from_Twitter">Quote from Twitter</h3><blockquote><p>NEW: DevDocs now comes with syntax highlighting. <a href="http://devdocs.io" target="_blank" rel="external">http://devdocs.io</a></p>
+<footer><strong>@DevDocs</strong><cite><a href="https://twitter.com/devdocs/status/356095192085962752" target="_blank" rel="external">twitter.com/devdocs/status/356095192085962752</a></cite></footer></blockquote>
+<h3 id="Quote_from_an_article_on_the_web">Quote from an article on the web</h3><blockquote><p>Every interaction is both precious and an opportunity to delight.</p>
+<footer><strong>Seth Godin</strong><cite><a href="http://sethgodin.typepad.com/seths_blog/2009/07/welcome-to-island-marketing.html" target="_blank" rel="external">Welcome to Island Marketing</a></cite></footer></blockquote>
+<h2 id="Code_Block">Code Block</h2><h3 id="Normal_code_block">Normal code block</h3><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert<span class="list">(<span class="quoted">'Hello</span> World!')</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<h3 id="With_caption">With caption</h3><figure class="highlight stylus"><figcaption><span>Array.map</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array.<span class="function"><span class="title">map</span><span class="params">(callback[, thisArg])</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="With_caption_and_URL">With caption and URL</h3><figure class="highlight ruby"><figcaption><span>.compact</span><a href="http://underscorejs.org/#compact" target="_blank" rel="external">Underscore.js</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.compact([<span class="number">0</span>, <span class="number">1</span>, <span class="keyword">false</span>, <span class="number">2</span>, ‘’, <span class="number">3</span>]);</span><br><span class="line"><span class="status">=&gt;</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="Gist">Gist</h3><script src="//gist.github.com/996818.js"></script>
+<h3 id="jsFiddle">jsFiddle</h3><iframe width="100%" height="300" src="http://jsfiddle.net/ccWP7/embedded/js,resources,html,css,result/light" frameborder="0" allowfullscreen></iframe>
+<h2 id="Pullquote">Pullquote</h2><h3 id="Left">Left</h3><blockquote class="pullquote left"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+</blockquote>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas tempus molestie arcu, et fringilla mauris placerat ac. Nullam luctus bibendum risus. Ut cursus sed ipsum feugiat egestas. Suspendisse elementum, velit eu consequat consequat, augue lorem dapibus libero, eget pulvinar dolor est sit amet nulla. Suspendisse a porta tortor, et posuere mi. Pellentesque ultricies, mi quis volutpat malesuada, erat felis vulputate nisl, ac congue ante tortor ut ante. Proin aliquam sem vel mauris tincidunt, eget scelerisque tortor euismod. Nulla tincidunt enim nec commodo dictum. Mauris id sapien et orci gravida luctus id ut dui. In vel vulputate odio. Duis vel turpis molestie, scelerisque enim eu, lobortis eros. Cras at ipsum gravida, sagittis ante vel, viverra tellus. Nunc mauris turpis, elementum ullamcorper nisl pretium, ultrices cursus justo. Mauris porttitor commodo eros, ac ornare orci interdum in. Cras fermentum cursus leo sed mattis. In dignissim lorem sem, sit amet elementum mauris venenatis ac.</p>
+<h3 id="Right">Right</h3><blockquote class="pullquote right"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+</blockquote>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ligula justo, lobortis sit amet semper vel, dignissim sit amet libero. Praesent ac tempus ligula. Maecenas at gravida odio. Etiam tristique volutpat lacus eu faucibus. Donec non tempus arcu. Phasellus adipiscing, mauris nec mollis egestas, ipsum nunc auctor velit, et rhoncus lorem ipsum at ante. Praesent et sem in velit volutpat auctor. Duis vel mauris nulla. Maecenas mattis interdum ante, quis sagittis nibh cursus et. Nulla facilisi. Morbi convallis gravida tortor, ut fermentum enim gravida et. Nunc vel dictum nisl, non ultrices libero. Proin vestibulum felis eget orci consectetur lobortis. Vestibulum augue nulla, iaculis vitae augue vehicula, dignissim ultrices libero. Sed imperdiet urna et quam ultrices tincidunt nec ac magna. Etiam vel pharetra elit.</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2013/12/25/tag-plugins/#comments" class="ds-thread-count comments-count-link" data-thread-key="2013/12/25/tag-plugins/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+
+  <nav id="page-nav" class="clearfix">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
+  </nav>
+
+</div>
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Android基础知识/" title="Android基础知识">Android基础知识<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Foo/Bar/" title="Bar">Bar<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Foo/Bar/Baz/" title="Baz">Baz<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Foo/" title="Foo">Foo<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Photo/" title="Photo">Photo<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">十一月 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">十二月 2013</a><span class="archive-list-count">13</span></li></ul>
+  </div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Android/" title="Android">Android<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/屏幕适配/" title="屏幕适配">屏幕适配<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Foo/" title="Foo">Foo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Bar/" title="Bar">Bar<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Baz/" title="Baz">Baz<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Jacman/" title="Jacman">Jacman<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/consectetur/" title="consectetur">consectetur<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=2294961201&verifier=e10a4b17&dpc=1"></iframe>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m AzenHuang. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2294961201" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/azenhuang" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="https://plus.google.com/azenhuang?rel=author" target="_blank" class="icon-google_plus" title="Google+"></a>
+		
+		
+		<a href="mailto:azenhuang@163.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="AzenHuang">AzenHuang</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"azenhuang"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-56887565-1', 'auto');  
+ga('send', 'pageview');
+</script>
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Ff507f1f46a7f17a48eeb3df7b11a3980' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+ </html>
